@@ -14,7 +14,13 @@
 }
 
 .product-info {
-    margin: 0 14px;
+    margin: 0px 14px;
+
+
+}
+
+.product-info p {
+    margin: 0px;
 }
 
 .product-name {
@@ -30,6 +36,7 @@
     color: coral;
     border: 0px;
     border-radius: 0px 0px 8px 8px;
+    margin-top: 10px;
     position: absolute;
     bottom: 0;
 
