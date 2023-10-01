@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
-import { addToDb, removeFromDb } from '../../utilities/fakedb';
+import { addToDb, deleteShoppingCart, removeFromDb, removeOneFromDb } from '../../utilities/fakedb';
 
 const Orders = () => {
     const { products, initialCart } = useLoaderData();    //{ products: products, initialCart: initialCart }
@@ -14,12 +14,17 @@ const Orders = () => {
         removeFromDb(id);
     }
 
+    const clearCart = () => {
+        setCart([]);
+        deleteShoppingCart();
+    }
+
     const handleAddOne = (selectedProduct1) => {
         let newCart1 = [];
 
         const rest1 = cart.filter(product => product.id !== selectedProduct1.id);
         selectedProduct1.quantity = selectedProduct1.quantity + 1;
-        newCart1 = [...rest1, selectedProduct1];
+        newCart1 = [selectedProduct1, ...rest1];
         setCart(newCart1);
         addToDb(selectedProduct1.id)
     }
@@ -28,13 +33,16 @@ const Orders = () => {
 
         const rest1 = cart.filter(product => product.id !== selectedProduct1.id);
         if (selectedProduct1.quantity < 2) {
-            handleRemoveItem(selectedProduct1.id);
+            // const remaining = cart.filter(product => product.id !== selectedProduct1.id);
+            setCart(rest1);
+            removeFromDb(selectedProduct1.id);
+            // handleRemoveItem(selectedProduct1.id);
         }
         else {
             selectedProduct1.quantity = selectedProduct1.quantity - 1;
-            newCart1 = [...rest1, selectedProduct1];
+            newCart1 = [selectedProduct1, ...rest1];
             setCart(newCart1);
-            addToDb(selectedProduct1.id)
+            removeOneFromDb(selectedProduct1.id)
         }
     }
 
@@ -50,9 +58,16 @@ const Orders = () => {
                         handleRemoveItem={handleRemoveItem}
                     ></ReviewItem>)
                 }
+                {
+                    cart.length === 0 && <h2>No items for Review.Please <Link to='/'>Shop More</Link></h2>
+                }
             </div>
             <div className='cart-container'>
-                <Cart cart={cart}></Cart>
+                <Cart clearCart={clearCart} cart={cart}>
+                    <button>
+                        <Link to='/shipping'>Proceed Shipping</Link>
+                    </button>
+                </Cart>
             </div>
 
         </div>
