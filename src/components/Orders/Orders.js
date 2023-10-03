@@ -8,10 +8,10 @@ const Orders = () => {
     const { products, initialCart } = useLoaderData();    //{ products: products, initialCart: initialCart }
     const [cart, setCart] = useState(initialCart);
 
-    const handleRemoveItem = (id) => {
-        const remaining = cart.filter(product => product._id !== id);
+    const handleRemoveItem = (_id) => {
+        const remaining = cart.filter(product => product._id !== _id);
         setCart(remaining);
-        removeFromDb(id);
+        removeFromDb(_id);
     }
 
     const clearCart = () => {
@@ -33,10 +33,10 @@ const Orders = () => {
 
         const rest1 = cart.filter(product => product._id !== selectedProduct1._id);
         if (selectedProduct1.quantity < 2) {
-            // const remaining = cart.filter(product => product.id !== selectedProduct1.id);
+            // const remaining = cart.filter(product => product._id !== selectedProduct1._id);
             setCart(rest1);
             removeFromDb(selectedProduct1._id);
-            // handleRemoveItem(selectedProduct1.id);
+            // handleRemoveItem(selectedProduct1._id);
         }
         else {
             selectedProduct1.quantity = selectedProduct1.quantity - 1;
