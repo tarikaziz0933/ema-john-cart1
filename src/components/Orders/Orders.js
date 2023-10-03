@@ -9,7 +9,7 @@ const Orders = () => {
     const [cart, setCart] = useState(initialCart);
 
     const handleRemoveItem = (id) => {
-        const remaining = cart.filter(product => product.id !== id);
+        const remaining = cart.filter(product => product._id !== id);
         setCart(remaining);
         removeFromDb(id);
     }
@@ -22,27 +22,27 @@ const Orders = () => {
     const handleAddOne = (selectedProduct1) => {
         let newCart1 = [];
 
-        const rest1 = cart.filter(product => product.id !== selectedProduct1.id);
+        const rest1 = cart.filter(product => product._id !== selectedProduct1._id);
         selectedProduct1.quantity = selectedProduct1.quantity + 1;
         newCart1 = [selectedProduct1, ...rest1];
         setCart(newCart1);
-        addToDb(selectedProduct1.id)
+        addToDb(selectedProduct1._id)
     }
     const handleRemoveOne = (selectedProduct1) => {
         let newCart1 = [];
 
-        const rest1 = cart.filter(product => product.id !== selectedProduct1.id);
+        const rest1 = cart.filter(product => product._id !== selectedProduct1._id);
         if (selectedProduct1.quantity < 2) {
             // const remaining = cart.filter(product => product.id !== selectedProduct1.id);
             setCart(rest1);
-            removeFromDb(selectedProduct1.id);
+            removeFromDb(selectedProduct1._id);
             // handleRemoveItem(selectedProduct1.id);
         }
         else {
             selectedProduct1.quantity = selectedProduct1.quantity - 1;
             newCart1 = [selectedProduct1, ...rest1];
             setCart(newCart1);
-            removeOneFromDb(selectedProduct1.id)
+            removeOneFromDb(selectedProduct1._id)
         }
     }
 
@@ -51,7 +51,7 @@ const Orders = () => {
             <div className='orders-container'>
                 {
                     cart.map(product => <ReviewItem
-                        key={product.id}
+                        key={product._id}
                         product={product}
                         handleAddOne={handleAddOne}
                         handleRemoveOne={handleRemoveOne}

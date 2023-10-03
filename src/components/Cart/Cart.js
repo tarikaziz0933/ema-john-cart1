@@ -9,11 +9,13 @@ const Cart = ({ cart, clearCart, children }) => {
 
     for (const product of cart) {
         quantity = quantity + product.quantity;
-        total = total + product.price * product.quantity;
-        shipping = shipping + product.shipping;
+        total = total + parseFloat(product.price) * product.quantity;
+        shipping = shipping + parseFloat(product.shipping);
     }
     const tax = (total * 0.1).toFixed(2);
+    console.log(tax);
     const grandTotal = total + shipping + parseFloat(tax);
+    console.log(grandTotal);
     return (
         <div className='cart'>
             <h3>Order Summary</h3>

@@ -54,7 +54,7 @@ const Admin = () => {
                     <br />
                     <input onBlur={handleInputBlur} type="text" name="ratingsCount" placeholder="Enter ratingsCount" required />
                     <br />
-                    <input onBlur={handleInputBlur} type="file" name="image" id="" />
+                    <input onBlur={handleInputBlur} type="file" name="img" id="" />
                     <br />
                     <input onBlur={handleInputBlur} type="text" name="shipping" placeholder="Enter shipping" required />
                     <br />
