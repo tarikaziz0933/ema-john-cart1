@@ -10,6 +10,7 @@ import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import Shipping from './components/Shipping/Shipping';
 import PrivateRouter from './routes/PrivateRouter';
+import Admin from './components/Admin/Admin';
 
 function App() {
   const router = createBrowserRouter([
@@ -38,6 +39,10 @@ function App() {
         {
           path: '/about',
           element: <About></About>
+        },
+        {
+          path: '/admin',
+          element: <Admin></Admin>
         },
         {
           path: '/login',

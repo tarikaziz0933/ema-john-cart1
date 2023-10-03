@@ -13,6 +13,7 @@ const Header = () => {
                 <Link to="/">Shop</Link>
                 <Link to="/orders">Order</Link>
                 <Link to="/inventory">Inventory</Link>
+                <Link to="/admin">Admin</Link>
                 <Link to="/about">About</Link>
                 {
                     user?.uid ?
