@@ -20,7 +20,7 @@ function App() {
       children: [
         {
           path: '/',
-          loader: () => fetch('https://ema-john-cart1-server.vercel.app/products'),
+          // loader: () => fetch('http://localhost:5000/products'),
           element: <Shop></Shop>
         },
         {
